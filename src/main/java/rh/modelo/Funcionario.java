@@ -5,6 +5,8 @@
  */
 package rh.modelo;
 
+import java.util.Date;
+
 
 public class Funcionario {
 
@@ -12,6 +14,7 @@ public class Funcionario {
     private String sobrenome;
     private String departamento;
     private int idade;
+    private Date dataNascimento;
     private double salario;
     private String casa;
     private String rua;
@@ -21,11 +24,11 @@ public class Funcionario {
     public Funcionario() {
     }
 
-    public Funcionario(String nome, String sobrenome, String departamento, int idade, double salario) {
+    public Funcionario(String nome, String sobrenome, String departamento, double salario) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.departamento = departamento;
-        this.idade = idade;
+        // this.idade = idade;
         this.salario = salario;
     }
 
@@ -99,6 +102,14 @@ public class Funcionario {
 
     public void setMunicipio(String municipio) {
         this.municipio = municipio;
+    }
+
+    public Date getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
     
     

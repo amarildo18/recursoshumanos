@@ -8,26 +8,47 @@
     </h:head>
     <h:body>
         <h:form>
-            <h:panelGrid columns="2">
+            <!--h:messages showDetail="true" showSummary="true" style="color:#00FF00" /-->
+            <h:panelGrid columns="3">
                 <f:facet name="header">Registo de novo funcionario</f:facet>
                 
                 <h:outputLabel value="Nome"/>
-                <h:inputText value="#{funcionarioCDIBean.funcionario.nome}" size="60" />
+                <h:inputText id="nome" value="#{funcionarioCDIBean.funcionario.nome}" 
+                    size="60" requiredMessage="O campo nome e obrigatorio" 
+                    required="true"
+                />
+                <h:message for="nome" style="color:#ff0000"/>
+                
                 <h:outputLabel value="Sobrenome"/>
-                <h:inputText value="#{funcionarioCDIBean.funcionario.sobrenome}" size="60" />
-                <h:outputLabel value="Departamento"/>
+                <h:inputText id="sobrenome" value="#{funcionarioCDIBean.funcionario.sobrenome}" 
+                    size="60"
+                    requiredMessage="O campo sobrenome e obrigatorio"
+                />
+                <h:message for="sobrenome" style="color:#ff0000"/>
+                
+                <h:outputLabel id="departamento" value="Departamento"/>
                 <h:selectOneMenu value="#{funcionarioCDIBean.funcionario.departamento}">
                     <f:selectItem itemValue="contabilidade" itemLabel="Contabilidade" />
                     <f:selectItem itemValue="formacao" itemLabel="Formacao" />
                     <f:selectItem itemValue="higiene" itemLabel="Higiene" />
                     <f:selectItem itemValue="vendas" itemLabel="Vendas" />
                 </h:selectOneMenu>
+                <h:message for="departamento" />
                 
                 <h:outputLabel value="Salario"/>
-                <h:inputText value="#{funcionarioCDIBean.funcionario.salario}" size="30" />
+                <h:inputText id="salario" value="#{funcionarioCDIBean.funcionario.salario}" size="30">
+                    <f:convertNumber minFractionDigits="2" />
+                </h:inputText>
+                <h:message for="salario" style="color:#ff0000"/>
                 
-                <h:outputLabel value="Idade"/>
-                <h:inputText value="#{funcionarioCDIBean.funcionario.idade}" size="30" />
+                <h:outputLabel value="Data de nascimento" />
+                <h:inputText id="data_nascimento" value="#{funcionarioCDIBean.funcionario.dataNascimento}"
+                    required="true"
+                    requiredMessage="A data de nascimento e obrigatoria"
+                >
+                    <f:convertDateTime dateStyle="medium" pattern="dd/MM/YYYY" />
+                </h:inputText>
+                <h:message for="data_nascimento" style="color:#ff0000"/>
                 
                 <h:outputLabel value="Endereço"/>
                 <h:panelGroup>
