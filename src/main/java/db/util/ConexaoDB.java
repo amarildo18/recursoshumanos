@@ -15,7 +15,7 @@ public class ConexaoDB {
     
     public static Connection ligarDB(){
     
-        String URL_DB = "jdbc:mysql://127.0.0.1:3306/gestaorh?serverTimezone=UTC";
+        String URL_DB = "jdbc:mysql://127.0.0.1:3306/gestaorh?useSSL=flase&serverTimezone=UTC";
         String DRIVER8 = "com.mysql.cj.jdbc.Driver";
         String DRIVER5 = "com.mysql.jdbc.Driver";
         String USER = "root";

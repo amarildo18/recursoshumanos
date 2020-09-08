@@ -6,6 +6,9 @@
 package rh.controlo;
 
 import dao.DepartamentoDAO;
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import rh.modelo.Departamento;
@@ -18,8 +21,19 @@ import rh.modelo.Departamento;
 @RequestScoped
 public class DepartamentoCDIBean {
 
-    Departamento departamento = new Departamento();
+    Departamento departamento = null;
+    List<Departamento> departamentos = null;
     DepartamentoDAO dao = new DepartamentoDAO();
+
+    @PostConstruct
+    public void init(){
+    
+        departamento = new Departamento();
+        departamentos = new ArrayList<>();
+        
+        departamentos = dao.listaDepartamento();
+    }
+    
 
     public Departamento getDepartamento() {
         return departamento;
@@ -28,6 +42,16 @@ public class DepartamentoCDIBean {
     public void setDepartamento(Departamento departamento) {
         this.departamento = departamento;
     }
+
+    public List<Departamento> getDepartamentos() {
+        return departamentos;
+    }
+
+    public void setDepartamentos(List<Departamento> departamentos) {
+        this.departamentos = departamentos;
+    }
+    
+    
     
     public String save(){
     
@@ -35,5 +59,5 @@ public class DepartamentoCDIBean {
         departamento = new Departamento();
         return "departamento";
     }
-    
+      
 }

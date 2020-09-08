@@ -8,6 +8,8 @@ package dao;
 import db.util.ConexaoDB;
 import rh.modelo.Departamento;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 /**
  *
  * @author amarildo.ferreira
@@ -18,8 +20,10 @@ public class DepartamentoDAO {
     String UPDATE = "";
     String DELETE = "";
     String SELECT_ALL = "SELECT * FROM departamento";
-    String SELECT_BY_NOME = "";
+    String SELECT_BY_NOME = "SELECT * FROM departamento d WHERE d.nome = ?";
     String SELECT_BY_SIGLA = "";
+    
+    public DepartamentoDAO(){}
     
     public void save(Departamento d){
     
@@ -38,5 +42,61 @@ public class DepartamentoDAO {
         
             System.err.println("Erro ao inserir dados: DepartamentoDAO:save "+e.getLocalizedMessage());
         }
+    }
+    
+    public List<Departamento> listaDepartamento(){
+    
+        List<Departamento> lista = new ArrayList<>();
+        PreparedStatement ps = null;
+        Connection conexao = null;
+        ResultSet rs = null;
+        Departamento d = null;
+        
+        try{
+        
+            conexao = ConexaoDB.ligarDB();
+            ps = conexao.prepareStatement(SELECT_ALL);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+            
+                d = new Departamento();
+                d.setSigla(rs.getString(1));
+                d.setSigla(rs.getString(2));
+                lista.add(d);  
+            }
+        }catch(SQLException ex){
+            System.err.println("Erro ao ler dados: DepartamentoDAO -lista Departamento "+ex.getLocalizedMessage());
+        }
+        return lista;
+    }
+    
+    // listagemm dos departamentos por nome
+    public List<Departamento> getDepartamentoByNome(String nome){
+    
+        List<Departamento> lista = new ArrayList<>();
+        PreparedStatement ps = null;
+        Connection conexao = null;
+        ResultSet rs = null;
+        
+        Departamento d = null;
+        
+        try{
+        
+            conexao = ConexaoDB.ligarDB();
+            ps = conexao.prepareStatement(SELECT_BY_NOME);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+            
+                d = new Departamento();
+                d.setSigla(rs.getString(1));
+                d.setSigla(rs.getString(2));
+                lista.add(d);  
+            }
+        }catch(SQLException ex){
+            System.err.println("Erro ao ler dados: DepartamentoDAO -lista Departamento "+ex.getLocalizedMessage());
+        }
+        return lista;
     }
 }
