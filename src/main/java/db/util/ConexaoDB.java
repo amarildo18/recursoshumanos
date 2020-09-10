@@ -19,7 +19,7 @@ public class ConexaoDB {
         String DRIVER8 = "com.mysql.cj.jdbc.Driver";
         String DRIVER5 = "com.mysql.jdbc.Driver";
         String USER = "root";
-        String PASSWORD = "root";
+        String PASSWORD = "";
         
         Connection conexao;
         
