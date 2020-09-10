@@ -20,9 +20,7 @@ import rh.modelo.Funcionario;
 @RequestScoped
 public class FuncionarioMBean {
 
-    Funcionario funcionario1 = new Funcionario("Amarildo","Ferreira","Informatica",29,50000.00);
-    Funcionario funcionario2 = new Funcionario("Abreu","Ferreira","Transportes",52, 150000.00);
-    Funcionario funcionario3 = new Funcionario("Judite","Karipa","Logistica",49,70000.00);
+   
     
     List<Funcionario> funcionarios = new ArrayList<>();
 
@@ -34,9 +32,6 @@ public class FuncionarioMBean {
     @PostConstruct
     public void init(){
     
-        this.funcionarios.add(funcionario1);
-        this.funcionarios.add(funcionario2);
-        this.funcionarios.add(funcionario3);
         
     }
 
