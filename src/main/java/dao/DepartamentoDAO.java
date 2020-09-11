@@ -62,7 +62,7 @@ public class DepartamentoDAO {
             
                 d = new Departamento();
                 d.setSigla(rs.getString(1));
-                d.setSigla(rs.getString(2));
+                d.setNome(rs.getString(2));
                 lista.add(d);  
             }
         }catch(SQLException ex){

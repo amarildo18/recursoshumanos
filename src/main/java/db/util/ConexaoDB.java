@@ -15,7 +15,8 @@ public class ConexaoDB {
     
     public static Connection ligarDB(){
     
-        String URL_DB = "jdbc:mysql://127.0.0.1:3306/gestaorh?useSSL=false&serverTimezone=UTC";
+        String URL_DB_MYSQ8 = "jdbc:mysql://127.0.0.1:3306/gestaorh?useSSL=false&serverTimezone=UTC";
+          String URL_DB_MYSQL = "jdbc:mysql://localhost:3306/gestaorh?serverTimezone=UTC";
         String DRIVER8 = "com.mysql.cj.jdbc.Driver";
         String DRIVER5 = "com.mysql.jdbc.Driver";
         String USER = "root";
@@ -25,8 +26,8 @@ public class ConexaoDB {
         
         try{
         
-            Class.forName(DRIVER8);
-            return conexao = DriverManager.getConnection(URL_DB,USER,PASSWORD);
+            Class.forName(DRIVER5);
+            return conexao = DriverManager.getConnection(URL_DB_MYSQL,USER,PASSWORD);
             
         }catch(ClassNotFoundException | SQLException ex){
             

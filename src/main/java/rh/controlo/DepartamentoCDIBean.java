@@ -21,17 +21,17 @@ import rh.modelo.Departamento;
 @RequestScoped
 public class DepartamentoCDIBean {
 
-    Departamento departamento = null;
-    List<Departamento> departamentos = null;
+    Departamento departamento;
+    List<Departamento> departamentos = new ArrayList<>();
     DepartamentoDAO dao = new DepartamentoDAO();
 
     @PostConstruct
     public void init(){
     
         departamento = new Departamento();
-        departamentos = new ArrayList<>();
+       departamentos = dao.listaDepartamento();
         
-        departamentos = dao.listaDepartamento();
+       
     }
     
 
@@ -43,7 +43,9 @@ public class DepartamentoCDIBean {
         this.departamento = departamento;
     }
 
+   
     public List<Departamento> getDepartamentos() {
+       
         return departamentos;
     }
 
