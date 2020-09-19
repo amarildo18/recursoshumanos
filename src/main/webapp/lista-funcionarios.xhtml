@@ -5,94 +5,107 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Lista funcionarios</title>
+        <h:outputStylesheet library="css" name="bootstrap.min.css" />
     </h:head>
     <h:body>
-        <h:form>
-            <!--h:messages showDetail="true" showSummary="true" style="color:#00FF00" /-->
-            <h:panelGrid columns="3">
-                <f:facet name="header">Registo de novo funcionario</f:facet>
-                
-                <h:outputLabel value="Nome"/>
-                <h:inputText id="nome" value="#{funcionarioCDIBean.funcionario.nome}" 
-                    size="60" requiredMessage="O campo nome e obrigatorio" 
-                    required="true"
-                />
-                <h:message for="nome" style="color:#ff0000"/>
-                
-                <h:outputLabel value="Sobrenome"/>
-                <h:inputText id="sobrenome" value="#{funcionarioCDIBean.funcionario.sobrenome}" 
-                    size="60"
-                    requiredMessage="O campo sobrenome e obrigatorio"
-                />
-                <h:message for="sobrenome" style="color:#ff0000"/>
-                
-                <h:outputLabel id="departamento" value="Departamento"/>
-                <h:selectOneMenu value="#{funcionarioCDIBean.funcionario.departamento}">
-                    <f:selectItem itemValue="contabilidade" itemLabel="Contabilidade" />
-                    <f:selectItem itemValue="formacao" itemLabel="Formacao" />
-                    <f:selectItem itemValue="higiene" itemLabel="Higiene" />
-                    <f:selectItem itemValue="vendas" itemLabel="Vendas" />
-                </h:selectOneMenu>
-                <h:message for="departamento" />
-                
-                <h:outputLabel value="Salario"/>
-                <h:inputText id="salario" value="#{funcionarioCDIBean.funcionario.salario}" size="30">
-                    <f:convertNumber minFractionDigits="2" />
-                </h:inputText>
-                <h:message for="salario" style="color:#ff0000"/>
-                
-                <h:outputLabel value="Data de nascimento" />
-                <h:inputText id="data_nascimento" value="#{funcionarioCDIBean.funcionario.dataNascimento}"
-                    required="true"
-                    requiredMessage="A data de nascimento e obrigatoria"
-                >
-                    <f:convertDateTime dateStyle="medium" pattern="dd/MM/YYYY" />
-                </h:inputText>
-                <h:message for="data_nascimento" style="color:#ff0000"/>
-                
-                <h:outputLabel value="Endereço"/>
-                <h:panelGroup>
-                    <h:panelGrid columns="4">
-                        <h:outputLabel value="Casa"/>
-                        <h:inputText value="#{funcionarioCDIBean.funcionario.casa}" size="20" />
-                        
-                        <h:outputLabel value="Rua"/>
-                        <h:inputText value="#{funcionarioCDIBean.funcionario.rua}" size="20" />
-                        
-                        <h:outputLabel value="Bairro"/>
-                        <h:inputText value="#{funcionarioCDIBean.funcionario.bairro}" size="20" />
-                        
-                        <h:outputLabel value="Municipio"/>
-                        <h:selectOneMenu value="#{funcionarioCDIBean.funcionario.municipio}">
-                            <f:selectItem itemValue="viana" itemLabel="Viana" />
-                            <f:selectItem itemValue="cacuaco" itemLabel="Cacuaco" />
-                            <f:selectItem itemValue="cazenga" itemLabel="Cazenga" />
-                            <f:selectItem itemValue="samba" itemLabel="Samba" />
-                        </h:selectOneMenu>
-                    </h:panelGrid>
-                </h:panelGroup>
-                
-                
-            </h:panelGrid>
-            <h:commandButton class="btn btn-primary" value="Guardar" action="#{funcionarioCDIBean.salvar()}" />
-        </h:form>
-        
-        <hr />
-        <h:dataTable value="#{funcionarioCDIBean.funcionarios}" var="funcionario">
-            <f:facet name="header">Lista de funcionarios</f:facet>
-            <h:column>
-                <f:facet name="header">Nome</f:facet>
-                #{funcionario.nome}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Sobrenome</f:facet>
-                #{funcionario.sobrenome}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Salario</f:facet>
-               #{funcionario.salario}
-            </h:column>
-        </h:dataTable>
+        <div class="container">
+            <h:form>
+                <!--h:messages showDetail="true" showSummary="true" style="color:#00FF00" /-->
+                <h:panelGrid columns="3">
+                   
+                    <f:facet  name="header">Registo de novo funcionario</f:facet>
+                    
+                    <h:outputLabel value="Nome"/>
+                    <h:inputText id="nome" value="#{funcionarioCDIBean.funcionario.nome}" 
+                                 size="60" requiredMessage="O campo nome e obrigatorio" 
+                                 required="true"
+                                 />   
+                    <h:message for="nome" style="color:#ff0000"/>
+
+
+                    <h:outputLabel value="Sobrenome"/>
+                    <h:inputText id="sobrenome" value="#{funcionarioCDIBean.funcionario.sobrenome}" 
+                                 size="60"
+                                 requiredMessage="O campo sobrenome e obrigatorio"
+                                 />
+                    <h:message for="sobrenome" style="color:#ff0000"/>
+
+                    <h:outputLabel id="sexo" value="Sexo" for="sexo"/>
+                    <h:selectOneRadio value="#{funcionarioCDIBean.funcionario.departamento}">
+                        <f:selectItems value="#{funcionarioCDIBean.selectSexos}" />
+                    </h:selectOneRadio> 
+                    <h:message for="sexo" style="color:#ff0000"/>
+
+                    <h:outputLabel id="departamento" value="Departamento"/>
+                    <h:selectOneMenu value="#{funcionarioCDIBean.funcionario.departamento}">
+                        <f:selectItems value="#{funcionarioCDIBean.selectDepartamentos}" />
+                    </h:selectOneMenu>
+                    <h:message for="departamento" style="color:#ff0000"/>
+
+                    <h:outputLabel id="departamento2" value="Departamento 2" for="Departamento2"/>
+                    <h:selectOneMenu value="#{funcionarioCDIBean.funcionario.departamento}">
+                        <f:selectItems value="#{funcionarioCDIBean.listaDepartamentos}" var="dp" itemValue="#{dp}" itemLabel="#{dp.nome}"/>
+                    </h:selectOneMenu>
+                    <h:message for="departamento" />
+
+                    <h:outputLabel value="Salario"/>
+                    <h:inputText id="salario" value="#{funcionarioCDIBean.funcionario.salario}" size="30">
+                        <f:convertNumber minFractionDigits="2" />
+                    </h:inputText>
+                    <h:message for="salario" style="color:#ff0000"/>
+
+                    <h:outputLabel value="Data de nascimento" />
+                    <h:inputText id="data_nascimento" value="#{funcionarioCDIBean.funcionario.dataNascimento}"
+                                 required="true"
+                                 requiredMessage="A data de nascimento e obrigatoria"
+                                 >
+                        <f:convertDateTime dateStyle="medium" pattern="dd/MM/YYYY" />
+                    </h:inputText>
+                    <h:message for="data_nascimento" style="color:#ff0000"/>
+
+                    <h:outputLabel value="Endereço"/>
+                    <h:panelGroup>
+                        <h:panelGrid columns="4">
+                            <h:outputLabel value="Casa"/>
+                            <h:inputText value="#{funcionarioCDIBean.funcionario.casa}" size="20" />
+
+                            <h:outputLabel value="Rua"/>
+                            <h:inputText value="#{funcionarioCDIBean.funcionario.rua}" size="20" />
+
+                            <h:outputLabel value="Bairro"/>
+                            <h:inputText value="#{funcionarioCDIBean.funcionario.bairro}" size="20" />
+
+                            <h:outputLabel value="Municipio"/>
+                            <h:selectOneMenu value="#{funcionarioCDIBean.funcionario.municipio}">
+                                <f:selectItem itemValue="viana" itemLabel="Viana" />
+                                <f:selectItem itemValue="cacuaco" itemLabel="Cacuaco" />
+                                <f:selectItem itemValue="cazenga" itemLabel="Cazenga" />
+                                <f:selectItem itemValue="samba" itemLabel="Samba" />
+                            </h:selectOneMenu>
+                        </h:panelGrid>
+                    </h:panelGroup>
+
+
+                </h:panelGrid>
+                <h:commandButton class="btn btn-primary" value="Guardar" action="#{funcionarioCDIBean.salvar()}" />
+            </h:form>
+            <br></br>
+            <h:dataTable value="#{funcionarioCDIBean.funcionarios}" var="funcionario" class="table table-striped">
+                <!--f:facet name="header">Lista de funcionarios</f:facet-->
+                <h:column>
+                    <f:facet name="header">Nome</f:facet>
+                        #{funcionario.nome}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Sobrenome</f:facet>
+                        #{funcionario.sobrenome}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Salario</f:facet>
+                        #{funcionario.salario}
+                </h:column>
+            </h:dataTable>
+        </div>
     </h:body>
 </html>
 

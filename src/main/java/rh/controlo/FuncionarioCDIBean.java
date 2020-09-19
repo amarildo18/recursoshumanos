@@ -5,6 +5,7 @@
  */
 package rh.controlo;
 
+import dao.DepartamentoDAO;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,10 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
+import rh.modelo.Departamento;
 import rh.modelo.Funcionario;
+import rh.modelo.Sexo;
 
 /**
  *
@@ -24,17 +28,26 @@ import rh.modelo.Funcionario;
 @SessionScoped
 public class FuncionarioCDIBean implements Serializable{
 
-    /**
-     * Creates a new instance of FuncionarioCDIBean
-     */
+    /*
     Funcionario funcionario1 = new Funcionario("Amarildo","Ferreira","Informatica",50000.00);
     Funcionario funcionario2 = new Funcionario("Abreu","Ferreira","Transportes", 150000.00);
     Funcionario funcionario3 = new Funcionario("Judite","Karipa","Logistica",70000.00);
+    */
+    Funcionario funcionario;
+    private List<Funcionario> funcionarios;
+    DepartamentoDAO dao;
     
-    Funcionario funcionario = new Funcionario();
+    @PostConstruct
+    public void init(){
+        
+        funcionario = new Funcionario();
+        funcionarios  = new ArrayList<>();
+        dao = new DepartamentoDAO();
+        /*this.funcionarios.add(funcionario1);
+        this.funcionarios.add(funcionario2);
+        this.funcionarios.add(funcionario3);*/
+    }
     
-    private List<Funcionario> funcionarios = new ArrayList<>();
-
     public List<Funcionario> getFuncionarios() {
         return funcionarios;
     }
@@ -52,12 +65,38 @@ public class FuncionarioCDIBean implements Serializable{
     }
     
     
-    @PostConstruct
-    public void init(){
+    /*
+        Metodo para retornar os departamentos na comboBox
+    */
+    public List<SelectItem> getSelectDepartamentos(){
         
-        this.funcionarios.add(funcionario1);
-        this.funcionarios.add(funcionario2);
-        this.funcionarios.add(funcionario3);
+        List<SelectItem> lista = new ArrayList<>();
+        
+        for(Departamento d: dao.listaDepartamento()){
+            lista.add(new SelectItem(d, d.getNome()));
+        }
+        return lista;
+    }
+    
+    /*
+        Metodo para retornar os Sexos na comboBox
+    */
+    public List<SelectItem> getSelectSexos(){
+        
+        List<SelectItem> lista = new ArrayList<>();
+        
+        for(Sexo s: Sexo.values()){
+            lista.add(new SelectItem(s, s.getExtensao()));
+        }
+        return lista;
+    }
+    
+    public List<Departamento> getListaDepartamentos(){
+    
+        List<Departamento> lista = new ArrayList<Departamento>();
+        lista = dao.listaDepartamento();
+        
+        return lista;
     }
     
     public String salvar(){

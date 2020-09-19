@@ -12,7 +12,7 @@ public class Funcionario {
 
     private String nome;
     private String sobrenome;
-    private String departamento;
+    private Departamento departamento;
     private int idade;
     private Date dataNascimento;
     private double salario;
@@ -24,7 +24,7 @@ public class Funcionario {
     public Funcionario() {
     }
 
-    public Funcionario(String nome, String sobrenome, String departamento, double salario) {
+    public Funcionario(String nome, String sobrenome, Departamento departamento, double salario) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.departamento = departamento;
@@ -48,14 +48,14 @@ public class Funcionario {
         this.sobrenome = sobrenome;
     }
 
-    public String getDepartamento() {
+    public Departamento getDepartamento() {
         return departamento;
     }
 
-    public void setDepartamento(String departamento) {
+    public void setDepartamento(Departamento departamento) {
         this.departamento = departamento;
     }
-
+    
     public int getIdade() {
         return idade;
     }
